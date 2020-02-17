@@ -1,9 +1,8 @@
 <li [ngClass]="{ 'completed': todo.completed, 'editing': editing }">
   <div class="view">
-    <input class="toggle" type="checkbox" (click)="completeTodo(index)"/>
+    <input class="toggle" type="checkbox" (click)="completeTodo(index)" [attr.checked]="todo.completed"/>
     <label (dblclick)="editTodo()" *ngIf="!isEditable"> {{ todo.text }} </label>
-    <input class="new-todo" *ngIf="isEditable" autofocus (keydown.enter)="updateTodo(index)"
-           [(ngModel)]="todo.text"/>
+    <input class="new-todo" *ngIf="isEditable" autofocus [(ngModel)]="todo.text"/>
     <button class="destroy" (click)="DeleteTodo(index)"></button>
   </div>
 </li>

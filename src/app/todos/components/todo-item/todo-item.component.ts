@@ -20,7 +20,7 @@ export class TodoItemComponent {
 
   public completeTodo(id: number) {
     this.todosService.toggleComplete(id);
-    this.todosService.AllTodos.subscribe(data => console.log(data));
+    this.todosService.AllTodos.subscribe();
   }
 
   public editTodo() {
@@ -29,10 +29,7 @@ export class TodoItemComponent {
 
   public DeleteTodo(id: number) {
     this.todosService.deleteTodo(id);
-    this.todosService.AllTodos.subscribe(data => console.log(data));
-  }
-
-  public updateTodo(id: number) {
+    this.todosService.AllTodos.subscribe();
   }
 
 }
