@@ -1,0 +1,9 @@
+<footer class="footer">
+  <span class="todo-count"> {{ todosRemanining }} </span>
+  <ul class="filters">
+    <li *ngFor="let filter of filterModes;">
+      <a (click)="selecteFilterType(filter)" [ngClass]="{'selected': selectedFilter === filter}">{{filter}}</a>
+    </li>
+  </ul>
+  <button class="clear-completed" (click)="clear()">Clear completed</button>
+</footer>

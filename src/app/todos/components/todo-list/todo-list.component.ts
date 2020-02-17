@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {ITodo} from '@app/todos/interfaces';
 
 @Component({
   selector: 'app-todos-list',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
   ],
   templateUrl: './todo-list.component.html',
 })
-export class TodosListComponent {}
+export class TodosListComponent {
+
+  @Input() todos: ITodo[];
+}

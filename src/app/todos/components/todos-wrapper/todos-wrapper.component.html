@@ -1,0 +1,12 @@
+<header class="header">
+  <h1>todos</h1>
+  <form enctype="application/x-www-form-urlencoded" role="form" novalidate onSubmit="return false;">
+    <input class="new-todo" placeholder="What needs to be done" autofocus (keydown.enter)="addTodo($event)">
+  </form>
+</header>
+<section class="main">
+  <app-complete-all></app-complete-all>
+  <app-todos-list [todos]="todos$"></app-todos-list>
+</section>
+
+<app-todos-footer *ngIf="todos$?.length" (emitTodos)="updateToDos($event)"></app-todos-footer>

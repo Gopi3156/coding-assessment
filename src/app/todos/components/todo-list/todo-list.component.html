@@ -1,9 +1,4 @@
 <ul class="todo-list">
-  <li>
-    <div class="view">
-      <input class="toggle" type="checkbox" />
-      <label></label>
-      <button class="destroy"></button>
-    </div>
-  </li>
+    <app-todo-item *ngFor="let todo of todos; let i = index"
+                   [todo]="todo" [index]="i"></app-todo-item>
 </ul>
