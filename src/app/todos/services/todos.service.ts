@@ -15,6 +15,7 @@ export class TodosService {
   private todos$ = new BehaviorSubject<ITodo[]>([]); // Initialize with empty todo array.
   private todoStore: ITodo[] = []; // store our todos in memory.
   todos = this.todos$.asObservable();
+  public toggle = false;
 
   constructor(private store: Store<ITodosState>) {
     this.allTodos$ = this.store.select(todoSelectors.allTodos);
@@ -34,17 +35,18 @@ export class TodosService {
   }
 
   toggleComplete(index: number): void {
-    if (this.todoStore[index] ['completed']) {
-      this.todoStore[index] ['completed'] = false;
-    } else {
-      this.todoStore[index] ['completed'] = true;
-    }
+    this.todoStore[index] ['completed'] = !this.todoStore[index] ['completed'];
     this.todos$.next(this.todoStore);
     // this.store.dispatch(TodoActions.toggleCompleted({index}));
   }
 
   toggleAllCompleted(): void {
-    this.store.dispatch(TodoActions.toggleAllCompleted());
+    this.toggle = !this.toggle;
+    this.todoStore.forEach(todo => {
+      todo['completed'] = this.toggle;
+    });
+    this.todos$.next(this.todoStore);
+    // this.store.dispatch(TodoActions.toggleAllCompleted());
   }
 
   updateTodo(index: number, text: string): void {

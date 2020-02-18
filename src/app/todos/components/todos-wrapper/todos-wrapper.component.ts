@@ -11,12 +11,17 @@ export class TodosWrapperComponent implements OnInit {
 
   public todos$: ITodo[];
 
+  public showFooter = false;
+
   constructor(private todoService: TodosService) {
   }
 
   ngOnInit() {
     this.todoService.AllTodos.subscribe(data => {
       this.todos$ = data;
+      if (this.todos$.length === 0) {
+        this.showFooter = false;
+      }
     });
   }
 
@@ -26,6 +31,7 @@ export class TodosWrapperComponent implements OnInit {
       return;
     }
     this.todoService.addTodo(text);
+    this.showFooter = true;
     event.target.value = null;
   }
 

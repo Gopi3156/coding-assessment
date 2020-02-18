@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {TodosService} from '@app/todos/services/todos.service';
 import {ITodo} from '@app/todos/interfaces';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-todo-item',
@@ -9,27 +10,37 @@ import {ITodo} from '@app/todos/interfaces';
 })
 export class TodoItemComponent {
 
-  public isEditable = false;
-
   @Input() todo: ITodo;
 
   @Input() index: number;
+
+  public editing = false;
+
+  public sub: Subscription;
 
   constructor(private todosService: TodosService) {
   }
 
   public completeTodo(id: number) {
     this.todosService.toggleComplete(id);
-    this.todosService.AllTodos.subscribe();
+    this.updateDOM();
   }
 
   public editTodo() {
-    this.isEditable = true;
+    this.editing = true;
   }
 
   public DeleteTodo(id: number) {
     this.todosService.deleteTodo(id);
-    this.todosService.AllTodos.subscribe();
+    this.updateDOM();
+  }
+
+  private updateDOM(): void {
+    this.sub = this.todosService.AllTodos.subscribe();
+  }
+
+  public onBlur() {
+    this.editing = false;
   }
 
 }

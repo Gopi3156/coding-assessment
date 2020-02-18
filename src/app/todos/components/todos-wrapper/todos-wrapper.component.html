@@ -9,4 +9,4 @@
   <app-todos-list [todos]="todos$"></app-todos-list>
 </section>
 
-<app-todos-footer *ngIf="todos$?.length" (emitTodos)="updateToDos($event)"></app-todos-footer>
+<app-todos-footer *ngIf="showFooter" (emitTodos)="updateToDos($event)"></app-todos-footer>

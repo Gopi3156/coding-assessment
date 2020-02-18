@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
 
-import { TodosService } from '@app/todos/services/todos.service';
+import {TodosService} from '@app/todos/services/todos.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,14 +16,13 @@ export class CompleteAllComponent implements OnInit, OnDestroy {
   multipleTodosExist = false;
   subscription: Subscription;
 
-  constructor (
-    private changeDetectorRef: ChangeDetectorRef,
-    private todosService: TodosService,
-  ) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              private todosService: TodosService,) {
+  }
 
   ngOnInit(): void {
-    this.subscription = this.todosService.allTodos$.subscribe(todos => {
-      this.multipleTodosExist = todos && todos.length > 1;
+    this.subscription = this.todosService.AllTodos.subscribe(todos => {
+      this.multipleTodosExist = todos && todos.length >= 1;
       this.changeDetectorRef.markForCheck();
     });
   }
